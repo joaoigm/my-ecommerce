@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <h3>Pedidos finalizados</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Valor do pedido</th>
+                <th>Data do pedido</th>
+                <th colspan="2">Itens</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{order.id}}</td>
+                <td>{{order.totalPrice}}</td>
+                <td>{{order.orderDate}}</td>
+                <td colspan="2" *ngFor="let p of order.products">
+                    {{p.product.name}} - {{p.quantity}}<br>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

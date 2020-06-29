@@ -1,0 +1,65 @@
+<app-header></app-header>
+<div class="container-fluid">
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="align-middle">Product</th>
+                <th class="align-middle">Price</th>
+                <th class="align-middle">Quantity</th>
+                <th class="align-middle">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cartP of cartProducts">
+                <td class="align-middle"><a (click)="removeProduct(cartP)" class="btn">
+                        <mat-icon aria-hidden="false">clear</mat-icon>
+                    </a></td>
+                <td class="align-middle" scope="row">{{cartP.product.name}}</td>
+                <td class="align-middle">{{cartP.product.price | currency:"BRL":"symbol"}}</td>
+                <td class="align-middle">
+                    <mat-form-field>
+                        <mat-select [(value)]="cartP.quantity" (selectionChange)="quantityChanged()">
+                            <mat-option>Qtd</mat-option>
+                            <mat-option *ngFor="let qtd of loadQuantityArray(cartP.product)" [value]="qtd">{{qtd}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td class="align-middle">{{cartP.product.price*cartP.quantity | currency:"BRL":"symbol"}}</td>
+            </tr>
+            <tr>
+                <td class="align-middle" colspan="4"><strong>Total do Pedido:</strong></td>
+                <td class="align-middle">{{loadTotalOrderPrice() | currency:"BRL":"symbol"}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <a routerLink='' class="btn">Voltar</a>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmarPedido"
+            style="margin-left: 20px;">Finalizar Pedido</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmarPedido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Finalizar Pedido</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Confirma a finalização do pedido no valor de: {{loadTotalOrderPrice() | currency:"BRL":"symbol"}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" (click)="confirmOrder()" data-dismiss="modal">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>

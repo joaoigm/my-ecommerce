@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row col">
+        <div class="form-group">
+          <input type="text" class="form-control" name="searchText" id="" aria-describedby="helpId" placeholder="Search" [(ngModel)]="searchText" (change)="search()">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+    
+            <div class="row row-cols-1 row-cols-md-3">
+                <div class="col mb-4" *ngFor="let product of products">
+                    <div class="card" style="text-align: center!important;">
+                        <div class="card-header">
+                            {{product.name}}
+                        </div>
+                        <div class="card-body">
+                            <div *ngIf="product.available">
+                                <p>AVAILABLE IN STOCK: {{product.stock}}</p>
+                                <div class="col"><button type="button" class="btn btn-success" (click)="addToCart(product)" >ADD TO CART</button></div>
+                                <div class="col">
+                                    <mat-form-field>
+                                        <mat-label>Quantidade de produtos</mat-label>
+                                        <mat-select [(value)]="product.selectedQuantity" class="btn btn-default">
+                                            <mat-option>Qtd</mat-option>
+                                            <mat-option *ngFor="let qtd of loadQuantityArray(product)" [value]="qtd">{{qtd}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>  
+                            </div>
+                            <div *ngIf="!product.available">
+                                <div>
+                                    <h5>PRODUCT UNAVAILABLE</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            PRICE: {{product.price | currency:"BRL":"symbol"}}
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

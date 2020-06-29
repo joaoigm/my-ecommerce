@@ -1,0 +1,10 @@
+<span class="badge badge-light">
+    <a *ngIf="user !== undefined" [routerLink]="['/cart']">
+        <mat-icon aria-hidden="false" aria-label="Shop Cart icon">shopping_cart</mat-icon>
+        <div *ngIf="cart !== undefined">
+            <span *ngIf="cart">{{cart.length}}</span>
+        </div>
+    </a>
+    
+    
+</span>

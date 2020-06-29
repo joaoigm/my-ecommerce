@@ -1,0 +1,30 @@
+<header class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">My E-comm</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav mr-auto">
+            <li>
+                <a class="nav-item nav-link" routerLink="/">Home</a>
+            </li>
+            <li>
+                <a class="nav-item nav-link" *ngIf="authenticated" routerLink="/orders">Orders</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li>
+                <cart-icon-app></cart-icon-app>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li *ngIf="!authenticated">
+                <a routerLink="/login" class="nav-item nav-link btn btn-primary text-white">Log in</a>
+            </li>
+            <li *ngIf="authenticated">
+                <button (click)="logout()" href class="nav-item nav-link btn btn-primary text-white">Log out</button>
+            </li>
+        </ul>
+    </div>
+</header>
